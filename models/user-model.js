@@ -7,9 +7,19 @@ const mongoose = require("mongoose");
 // }
 
 const userSchema = mongoose.Schema({
-  fullname: String,
-  email: String,
-  password: String,
+  fullname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   cart: {
     type: Array,
     default: []
@@ -19,7 +29,6 @@ const userSchema = mongoose.Schema({
     default: []
   },
   contact: Number,
-  isAdmin: Boolean,
   contact: Number,
   picture: String
 })
