@@ -24,8 +24,9 @@ if (process.env.NODE_ENV === "development") {
       .send(`Owner has been created successfullu: ${createdOwner}`);
   });
 }
-router.get("/", function (req, res) {
-  res.send("Hey");
+router.get("/admin", function (req, res) {
+  let flashMsg = req.flash("success")
+  res.render('createproducts',{success: flashMsg});
 });
 
 module.exports = router;
