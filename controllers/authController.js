@@ -51,7 +51,7 @@ module.exports.loginUser = async function(req,res){
       res.cookie("token", token);
       res
        .status(200)
-       .render(`shop`,{products: []});
+       .redirect('/shop')
     }else{
       res.status(401).send(`Email or password incorrect`);
     }
