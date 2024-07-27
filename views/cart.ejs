@@ -1,26 +1,65 @@
-<%- include('./partials/header') %>
-    <div class="w-full h-screen flex items-start px-20 py-20 gap-10">
-        <div class="w-[30%] rounded-md overflow-hidden">
-            <div class="w-full h-80 bg-yellow-500"></div>
-            <div class="w-full flex justify-between px-5 py-4">
-                <h3 class="text-2xl">Clinge Bag</h3>
-                <div class="flex items-center gap-2">
-                    <i class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-add-line"></i>
-                    <div class="px-2 py-1 rounded-md bg-white text-black">01</div>
-                    <i class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-subtract-line"></i>
+<%- include('./partials/header',{ customClass: 'no-scroll' } ) %>
+    <style>
+        .no-scroll {
+            overflow: hidden;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <div class="w-full h-screen flex items-start px-20 py-20 gap-10 overflow-hidden">
+        <div class="w-[60%] h-full overflow-y-auto flex flex-col gap-6 p-4">
+            <% user.cart.forEach(function(item){ %>
+                <div class="rounded-md border-2 flex shadow-lg h-[40%] p-2">
+                    <div class="w-[40%] flex justify-center items-center">
+                        <img class="h-24 w-24 object-contain rounded-full bg-[<%= item.bgcolor %>] p-2"
+                            src="data:image/png;base64,<%= item.image.toString('base64') %>" alt="<%= item.name %>">
+                    </div>
+                    <div class="w-full flex justify-between items-center px-5 py-4 bg-slate-300">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-gray-800"> Product Details </h3>
+                            <h4>
+                                <%= item.name %>
+                            </h4>
+                            <h5>Size: Regular</h5>
+
+                        </div>
+                        <div>
+                            <a href="/removefromcart/<%= item._id %>">
+                            <button
+                                class="w-10 h-10 bg-white flex rounded-full items-center justify-center ri-delete-bin-line hover:bg-red-400 transition">
+                                <i class="ri-delete-bin"></i>
+                            </button>
+                            </a>
+                        </div>
+                        <!-- increase quantity funcationality -->
+                        <!-- <div class="flex items-center gap-2">
+                            <button
+                                class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-add-line hover:bg-gray-200 transition">
+                                <i class="ri-add"></i>
+                            </button>
+                            <div class="px-2 py-1 rounded-md bg-white text-black">01</div>
+                            <button
+                                class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-subtract-line hover:bg-gray-200 transition">
+                                <i class="ri-subtract"></i>
+                            </button>
+                        </div> -->
+                    </div>
+                    <div class="flex items-center justify-between px-5 py-3 bg-slate-200">
+                        <h2 class="text-lg font-semibold text-gray-800">₹ <%= item.price %>
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="flex items-center justify-between px-5 py-3">
-                <h4 class="text-lg">Net Total</h4>
-                <h2 class="text-lg">₹ 1200</h2>
-            </div>
+                <% }) %>
         </div>
-        <div class="w-[70%]">
-            <h3 class="text-xl">Price Breakdown</h3>
+
+
+        <div class="w-[40%] h-full">
+            <h2 class="text-xl">Price Breakdown</h2>
             <div class="px-10 mt-5">
                 <div class="flex mt-2">
                     <h4 class="w-1/3">Total MRP</h4>
-                    <h4>₹ 1920</h4>
+                    <h4>₹ <%= cartTotal %>
+                    </h4>
                 </div>
                 <div class="flex mt-2">
                     <h4 class="w-1/3">Discount on MRP</h4>
@@ -38,7 +77,8 @@
             <div class="w-full h-[1px] bg-black mt-10"></div>
             <div class="flex mt-5">
                 <h3 class="w-1/3 text-xl">Total Amount</h3>
-                <h3 class="font-semibold text-xl text-green-600">₹ 1940</h3>
+                <h3 class="font-semibold text-xl text-green-600">₹ <%= finalBill %>
+                </h3>
             </div>
             <form action=""></form>
         </div>

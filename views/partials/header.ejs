@@ -9,15 +9,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full fixed bg-white top-0 left-0 px-10 py-5 flex justify-between ">
-        <h3 class="text-xl">Scratch</h3>
+<body class="font-['helvetica_now_display'] <%= typeof customClass !== 'undefined' ? customClass : '' %>">
+    <nav class="w-full fixed bg-white top-0 left-0 px-10 py-5 flex justify-between shadow-lg">
+        <h3 class="text-xl"><a href="/shop">Scratch</a></h3>
         <% var isLoggedin = typeof isLoggedin !== "undefined" ? isLoggedin : true %>
         <% if(isLoggedin){ %>
             <div class="flex gap-7">
                 <a href="/shop">Shop</a>
-                <a href="">Account</a>
-                <a href="">Cart</a>
+                <!-- <a href="">Account</a> -->
+                <a href="/cart">Cart</a>
                 <a class="text-red-600" href="/users/logout">Logout</a>
             </div>
         <% } %>      
