@@ -29,7 +29,6 @@ router.get('/removefromcart/:productId', isLoggedin, async function(req, res){
   try {
     let user = await userModel.findOne({email: req.user.email});
     let productId = req.params.productId;
-
     // Convert productId to ObjectId
     let objectIdProductId = new mongoose.Types.ObjectId(productId);
 
